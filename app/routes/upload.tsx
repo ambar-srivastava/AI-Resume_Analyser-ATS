@@ -10,6 +10,9 @@ import { generateUUID } from "~/lib/utils";
 
 const upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
+
+  const user = auth.getUser();
+
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
@@ -84,7 +87,7 @@ const upload = () => {
 
     setStatusText("Analysis complete! Redirecting...");
 
-    console.log(data);
+    navigate(`/resume/${uuid}`);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
