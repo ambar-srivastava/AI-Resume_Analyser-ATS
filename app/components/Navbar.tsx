@@ -16,19 +16,19 @@ const Navbar = () => {
   }, [auth.isAuthenticated, next]);
 
   return (
-    <nav className="navbar gap-6">
-      <div className="flex items-center justify-between w-full">
+    <nav className="navbar gap-2 md:gap-6">
+      <div className="flex items-center justify-between w-full gap-4">
         <Link to="/">
           <p className="text-2xl font-bold text-gradient uppercase">
             Resulyzer
           </p>
         </Link>
-        <Link to="/upload" className="primary-button w-fit">
+        <Link to="/upload" className="primary-button text-center w-fit">
           Upload Resume
         </Link>
       </div>
       {auth.isAuthenticated && (
-        <button className="primary-button w-fit" onClick={auth.signOut}>
+        <button className="primary-button w-fit text-center" onClick={auth.signOut}>
           <p>Logout</p>
         </button>
       )}
