@@ -1,6 +1,5 @@
 import Navbar from "~/components/Navbar";
 import type { Route } from "./+types/home";
-import { resumes } from "~/constants";
 import ResumeCard from "~/components/ResumeCard";
 import { usePuterStore } from "~/lib/puter";
 import { Link, useNavigate } from "react-router";
@@ -26,20 +25,20 @@ export default function Home() {
   }, [auth.isAuthenticated]);
 
   useEffect(() => {
-    const loadResume = async () => {
+    const loadingResumes = async () => {
       setLoadingResumes(true);
+
       const resumes = (await kv.list("resume:*", true)) as KVItem[];
 
       const parsedResumes = resumes?.map(
         (resume) => JSON.parse(resume.value) as Resume
       );
       console.log("Resumes loaded:", parsedResumes);
-      if (!parsedResumes) return;
       setResumes(parsedResumes || []);
       setLoadingResumes(false);
     };
 
-    loadResume();
+    loadingResumes();
   }, []);
 
   return (
@@ -53,7 +52,7 @@ export default function Home() {
           {!loadingResumes && resumes?.length === 0 ? (
             <h2>No resumes found. Upload your first resume to get feedback.</h2>
           ) : (
-            <h2>Review your submission and check AI-powered feedback.</h2>
+            <h2>Review your submissions and check AI-powered feedback.</h2>
           )}
         </div>
         {loadingResumes && (

@@ -3,9 +3,9 @@ import ScoreGauge from "./ScoreGauge";
 
 const Category = ({ title, score }: { title: string; score: number }) => {
   const textColor =
-    score >= 70
+    score > 70
       ? "text-green-600"
-      : score >= 50
+      : score > 49
         ? "text-yellow-600"
         : "text-red-600";
 

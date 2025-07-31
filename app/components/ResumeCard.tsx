@@ -6,6 +6,7 @@ import { usePuterStore } from "~/lib/puter";
 const ResumeCard = ({ resume }: { resume: Resume }) => {
   const { fs } = usePuterStore();
   const [resumeUrl, setResumeUrl] = useState("");
+
   useEffect(() => {
     const loadResume = async () => {
       const blob = await fs.read(resume.imagePath);

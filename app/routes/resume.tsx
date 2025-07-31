@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { data, Link, useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
 import Summary from "~/components/Summary";
@@ -45,8 +45,6 @@ const resume = () => {
       setImageUrl(imageUrl);
 
       setFeedback(data.feedback);
-
-      console.log({ resumeUrl, imageUrl, feedback: data.feedback });
     };
 
     loadResume();
@@ -89,7 +87,11 @@ const resume = () => {
               <Details feedback={feedback} />
             </div>
           ) : (
-            <img src="/images/resume-scan-2.gif" alt="search" />
+            <img
+              src="/images/resume-scan-2.gif"
+              alt="search"
+              className="w-full"
+            />
           )}
         </section>
       </div>

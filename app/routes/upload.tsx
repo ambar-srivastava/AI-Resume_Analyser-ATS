@@ -1,4 +1,3 @@
-import path from "path";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 import FileUploader from "~/components/FileUploader";
@@ -10,8 +9,6 @@ import { generateUUID } from "~/lib/utils";
 
 const upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
-
-  const user = auth.getUser();
 
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -37,24 +34,24 @@ const upload = () => {
     setStatusText("Uploading the resume...");
     const uploadedFile: any = await fs.upload([file]);
 
-    if (!uploadedFile) return setStatusText("Failed to upload file.");
+    if (!uploadedFile) return setStatusText("Error: Failed to upload file.");
 
-    setStatusText("Converting file to image...");
+    setStatusText("Converting file into image...");
     const imageFile = await convertPdfToImage(file);
     if (!imageFile.file) {
-      return setStatusText("Failed to convert the PDF into image.");
+      return setStatusText("Error: Failed to convert the PDF into image.");
     }
 
     setStatusText("Uploading the image...");
     const uploadedImage = await fs.upload([imageFile.file]);
-    if (!uploadedImage) return setStatusText("Failed to upload image.");
+    if (!uploadedImage) return setStatusText("Error: Failed to upload image.");
 
     setStatusText("Preparing the data for analysis...");
 
     const uuid = generateUUID();
     const data = {
       id: uuid,
-      resume: uploadedFile.path,
+      resumePath: uploadedFile.path,
       imagePath: uploadedImage.path,
       companyName,
       jobTitle,
@@ -74,7 +71,7 @@ const upload = () => {
     );
 
     if (!feedback) {
-      return setStatusText("Failed to analyze the resume.");
+      return setStatusText("Error: Failed to analyze the resume.");
     }
 
     const feedbackText =
