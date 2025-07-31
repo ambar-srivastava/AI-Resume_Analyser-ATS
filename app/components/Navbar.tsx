@@ -11,7 +11,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      navigate(next);
+      navigate("/");
     }
   }, [auth.isAuthenticated, next]);
 
