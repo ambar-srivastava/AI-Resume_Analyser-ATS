@@ -11,7 +11,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      navigate("/");
+      navigate(next);
     }
   }, [auth.isAuthenticated, next]);
 
@@ -28,9 +28,14 @@ const Navbar = () => {
         </Link>
       </div>
       {auth.isAuthenticated && (
-        <button className="primary-button w-fit text-center" onClick={auth.signOut}>
-          <p>Logout</p>
-        </button>
+        <Link to="/">
+          <button
+            className="primary-button w-fit text-center"
+            onClick={auth.signOut}
+          >
+            <p>Logout</p>
+          </button>
+        </Link>
       )}
     </nav>
   );
